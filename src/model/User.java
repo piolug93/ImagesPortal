@@ -15,19 +15,18 @@ public class User {
     public User() {
     }
 
-    public User(String login, String password, String email, Timestamp registredDate, boolean activated, boolean blocked, String lastIp) {
+    public User(User user) {
 
-        this.login = login;
-        this.password = password;
-        this.email = email;
-        this.registredDate = registredDate;
-        this.activated = activated;
-        this.blocked = blocked;
-        this.lastIp = lastIp;
+        this.login = user.login;
+        this.password = user.password;
+        this.email = user.email;
+        this.registredDate = user.registredDate;
+        this.activated = user.activated;
+        this.blocked = user.blocked;
+        this.lastIp = user.lastIp;
     }
 
     public long getId() {
-
         return id;
     }
 

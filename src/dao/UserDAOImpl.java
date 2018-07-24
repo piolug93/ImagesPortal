@@ -2,9 +2,12 @@ package dao;
 
 import model.User;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import util.ConnectionProvider;
 
 import java.util.List;
@@ -12,6 +15,8 @@ import java.util.List;
 public class UserDAOImpl implements UserDAO {
     private static final String READ_USER_BY_LOGIN = "SELECT * FROM users WHERE login=:login;";
     private static final String READ_USER = "SELECT * FROM users WHERE id=:id;";
+    private static final String CREATE_USER = "INSERT INTO `users` (`login`, `password`, `email`, `registredDate`, `activated`, `blocked`, `lastIp`) VALUES (:login , :password, :email, :registredDate, :activated, :blocked, :lastIp);";
+    private static final String SET_ROLE = "INSERT INTO user_role(idUser) VALUES (:id);";
 
     private NamedParameterJdbcTemplate template;
 
@@ -20,8 +25,21 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User create(User newObject) {
-        return null;
+    public User create(User user) {
+        User resultUser = new User(user);
+        KeyHolder holder = new GeneratedKeyHolder();
+        SqlParameterSource paramSource = new BeanPropertySqlParameterSource(user);
+        int update = template.update(CREATE_USER, paramSource, holder);
+        if(update > 0) {
+            resultUser.setId(holder.getKey().longValue());
+            setRole(resultUser);
+        }
+        return resultUser;
+    }
+
+    private void setRole(User user) {
+        SqlParameterSource paramSource = new BeanPropertySqlParameterSource(user);
+        template.update(SET_ROLE, paramSource);
     }
 
     @Override

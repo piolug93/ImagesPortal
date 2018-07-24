@@ -23,6 +23,12 @@ public class UserService {
         return user;
     }
 
+    public User getUserByEmail(String email) {
+        UserDAO userDAO = getUserDAO();
+        User user = userDAO.getUserByEmail(email);
+        return user;
+    }
+
     private UserDAO getUserDAO() {
         DAOFactory factory = DAOFactory.getDAOFactory();
         UserDAO userDAO = factory.getUserDAO();

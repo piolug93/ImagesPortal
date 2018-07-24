@@ -84,9 +84,17 @@
                                             <c:when test="${requestScope.error == 'false'}">
                                                 <div class="form-group notification alert-success">Rejestracja przebiegła pomyślnie</div>
                                             </c:when>
-                                            <c:when test="${not empty requestScope.error}">
-                                                <div class="form-group notification alert-danger">Popraw błąd w ${requestScope.error}</div>
-                                                ${requestScope.error}
+                                            <c:when test="${requestScope.error == 'repassword_incorrect'}">
+                                                <div class="form-group notification alert-danger">Hasła niezgodne</div>
+                                            </c:when>
+                                            <c:when test="${requestScope.error == 'email_exist'}">
+                                                <div class="form-group notification alert-danger">Użytkownik z takim e-mail istnieje już w bazie</div>
+                                            </c:when>
+                                            <c:when test="${requestScope.error == 'email_incorrect'}">
+                                                <div class="form-group notification alert-danger">E-mail niepoprawny</div>
+                                            </c:when>
+                                            <c:when test="${requestScope.error == 'login_exist'}">
+                                                <div class="form-group notification alert-danger">Użytkownik o takim loginie istnieje już w bazie</div>
                                             </c:when>
                                         </c:choose>
                                         <div class="form-group">

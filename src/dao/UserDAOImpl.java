@@ -14,6 +14,7 @@ import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
     private static final String READ_USER_BY_LOGIN = "SELECT * FROM users WHERE login=:login;";
+    private static final String READ_USER_BY_EMAIL = "SELECT * FROM users WHERE email=:email;";
     private static final String READ_USER = "SELECT * FROM users WHERE id=:id;";
     private static final String CREATE_USER = "INSERT INTO `users` (`login`, `password`, `email`, `registredDate`, `activated`, `blocked`, `lastIp`) VALUES (:login , :password, :email, :registredDate, :activated, :blocked, :lastIp);";
     private static final String SET_ROLE = "INSERT INTO user_role(idUser) VALUES (:id);";
@@ -70,6 +71,13 @@ public class UserDAOImpl implements UserDAO {
         User resultUser = null;
         SqlParameterSource paramSource = new MapSqlParameterSource("login", login);
         resultUser = template.queryForObject(READ_USER_BY_LOGIN, paramSource, BeanPropertyRowMapper.newInstance(User.class));
+        return resultUser;
+    }
+
+    public User getUserByEmail(String email) {
+        User resultUser = null;
+        SqlParameterSource paramSource = new MapSqlParameterSource("email", email);
+        resultUser = template.queryForObject(READ_USER_BY_EMAIL, paramSource, BeanPropertyRowMapper.newInstance(User.class));
         return resultUser;
     }
 }

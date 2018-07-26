@@ -16,7 +16,7 @@
                 <li><a href="#">Poczekalnia</a></li>
                 <li><a href="#">Losuj</a></li>
                 <li><a href="#">Top</a></li>
-                <li><a href="#">Dodaj</a></li>
+                <li><a href="addpost">Dodaj</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

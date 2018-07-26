@@ -20,7 +20,7 @@
             userNameCol="id"
             userCredCol="password"
             userRoleTable="user_role"
-            roleNameCol="role"
+            roleNameCol="roleName"
             localDataSource="true"
     >
         <CredentialHandler className="org.apache.catalina.realm.MessageDigestCredentialHandler"

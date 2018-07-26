@@ -16,3 +16,10 @@ $(function() {
     });
 
 });
+
+var loadFile = function(event) {
+    document.getElementById('image').style.height = "100%";
+    $(document.getElementById('image')).addClass('special');
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+};

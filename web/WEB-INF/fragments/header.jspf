@@ -22,7 +22,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <c:choose>
                     <c:when test="${not empty sessionScope.user}">
-                        <li><a href="${pageContext.session.invalidate()}"><span class="glyphicon glyphicon-log-in"></span>Wyloguj się</a></li>
+                        <li><a href="logout"><span class="glyphicon glyphicon-log-in"></span>Wyloguj się</a></li>
                     </c:when>
                     <c:otherwise>
                         <li><a href="login"><span class="glyphicon glyphicon-log-in"></span>Zaloguj się</a></li>

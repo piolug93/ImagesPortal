@@ -11,6 +11,7 @@ import java.io.IOException;
 public class LogoutController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getSession().invalidate();
         request.logout();
         response.sendRedirect(request.getContextPath()+"/");
     }

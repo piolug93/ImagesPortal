@@ -17,7 +17,7 @@ public class LoginController extends HttpServlet {
         if(request.getUserPrincipal() != null) {
             response.sendRedirect(request.getContextPath()+"/");
         } else {
-            request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
         }
     }
 
@@ -25,23 +25,22 @@ public class LoginController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String login = request.getParameter("login");
         String password = request.getParameter("password");
+        UserService userService = new UserService();
         User user = null;
         String id = null;
         try {
-            UserService userService = new UserService();
             user = userService.getUserByLogin(login);
             id = String.valueOf(user.getId());
         } catch (EmptyResultDataAccessException e) {
             request.setAttribute("error", "bad_login");
-            request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
         }
         try {
             request.login(id, password);
-            request.getSession().setAttribute("user", user);
             response.sendRedirect(request.getHeader("referer"));
         } catch(ServletException e) {
             request.setAttribute("error", "bad_login");
-            request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
         }
 
     }

@@ -2,8 +2,8 @@ package controller;
 
 import exception.ErrorRegistrationException;
 import model.EmailValidator;
-import model.LoginValidate;
-import model.PasswordValidate;
+import model.LoginValidator;
+import model.PasswordValidator;
 import service.UserService;
 import Enum.RegistrationErrors;
 
@@ -23,9 +23,9 @@ public class RegisterController extends HttpServlet {
         String password = request.getParameter("password");
         String repassword = request.getParameter("confirm-password");
         try {
-            PasswordValidate.validate(password, repassword);
+            PasswordValidator.validate(password, repassword);
             EmailValidator.validate(email);
-            LoginValidate.validate(login);
+            LoginValidator.validate(login);
         } catch (ErrorRegistrationException e) {
             if(e.getTypeError() == RegistrationErrors.REPASSWORD_INCORRECT) {
                 request.setAttribute("error", "repassword_incorrect");

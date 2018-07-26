@@ -5,7 +5,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import service.UserService;
 import Enum.RegistrationErrors;
 
-public class LoginValidate{
+public class LoginValidator {
     public static boolean validate(String login) throws ErrorRegistrationException{
         UserService userService = new UserService();
         User user = null;

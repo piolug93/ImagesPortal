@@ -4,7 +4,7 @@ Images portal is my first project in Java Enterprise Edition.
 This portal allows add post with photos and views in main page, waiting page.
 
 TODO:
- - [ ] Add view for shuffle post
+ - [ ] Add view for random post
  - [ ] Add view for top posts
  - [ ] Add secured post module with password
  - [ ] Add vote post module

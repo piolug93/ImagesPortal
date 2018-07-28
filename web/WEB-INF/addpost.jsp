@@ -10,20 +10,20 @@
 
     <div class="container">
         <div class="row">
-            <form class="form-horizontal">
+            <form class="form-horizontal" method="post" enctype="multipart/form-data">
                 <fieldset>
                     <legend>Dodaj zdjęcie</legend>
                     <div class="col-md-7">
                         <div class="form-group">
                             <label class="col-md-1 control-label" for="textinput">Tytył</label>
                             <div class="col-md-9">
-                                <input id="textinput" name="textinput" placeholder="" class="form-control input-md" required="" type="text">
+                                <input id="textinput" name="title" placeholder="" class="form-control input-md" required="" type="text">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-1 control-label" for="textinput">Źródło</label>
                             <div class="col-md-9">
-                                <input id="textinput" name="textinput" placeholder="" class="form-control input-md" required="" type="text">
+                                <input id="textinput" name="source" placeholder="" class="form-control input-md" required="" type="text">
                             </div>
                         </div>
                         <div class="form-group">
@@ -31,22 +31,22 @@
                             <div class="col-md-7">
                                 <div class="input-group">
                                <span class="input-group-addon">
-                                  <input type="checkbox">
+                                  <input name="secured" type="checkbox">
                                </span>
-                                    <input id="prependedcheckbox" name="prependedcheckbox" class="form-control" type="password">
+                                    <input id="prependedcheckbox" name="password" class="form-control" type="password">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-1 control-label" for="textarea">Opis</label>
                             <div class="col-md-7">
-                                <textarea class="form-control" id="textarea" name="textarea"></textarea>
+                                <textarea class="form-control" id="textarea" name="content"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-1 control-label" for="singlebutton"></label>
                             <div class="col-md-8">
-                                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Save</button>
+                                <button id="singlebutton" type="submit" class="btn btn-primary">Save</button>
                             </div>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                                 </div>
                                 <div class="upload-options">
                                     <label>
-                                        <input type="file" class="image-upload" accept="image/*" onchange="loadFile(event)"/>
+                                        <input type="file" name="image" class="image-upload" accept="image/*" onchange="loadFile(event)"/>
                                     </label>
                                 </div>
                             </div>
@@ -66,7 +66,6 @@
                     </div>
                 </fieldset>
             </form>
-
         </div>
     </div>
 

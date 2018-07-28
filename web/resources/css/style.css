@@ -289,3 +289,7 @@ Login and Register form
     right: 0;
     margin: auto;
 }
+
+.container-post {
+    padding-bottom: 20px;
+}

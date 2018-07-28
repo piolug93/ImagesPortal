@@ -1,14 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>ImagesPortal</title>
-    <%@include file="fragments/resources.jspf"%>
-</head>
-<body>
-<%@include file="fragments/header.jspf"%>
 <div class="container">
-
-    <c:if test="${not empty requestScope.post}">
         <div class="post row">
             <div class="col col-md-10 col-md-offset-1 border">
                 <h3>${post.title}</h3>
@@ -26,8 +17,4 @@
                 </div>
             </div>
         </div>
-    </c:if>
 </div>
-<%@include file="fragments/footer.jspf"%>
-</body>
-</html>

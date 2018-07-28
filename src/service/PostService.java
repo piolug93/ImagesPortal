@@ -8,6 +8,7 @@ import util.PasswordUtil;
 
 import java.util.Date;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.UUID;
 
 public class PostService {
@@ -32,8 +33,13 @@ public class PostService {
     public Post getPostById(long id) {
         PostDAO postDAO = getPostDAO();
         Post post = postDAO.read(id);
-        System.out.println(post.getImageName());
         return post;
+    }
+
+    public List<Post> getAllPost() {
+        PostDAO postDAO = getPostDAO();
+        List<Post> posts = postDAO.getAll();
+        return posts;
     }
 
     private PostDAO getPostDAO() {

@@ -6,26 +6,22 @@
   </head>
   <body>
     <%@include file="fragments/header.jspf"%>
-    <div class="container">
-        <div class="post row">
-            <div class="col col-md-10 col-md-offset-1 border">
-                <div class="border post-top">
-                    <h3><a href="#">Title</a></h3>
-                    <h5>Description</h5>
+    <c:forEach var="tmpPost" items="${requestScope.posts}">
+        <c:choose>
+            <c:when test="${tmpPost.mainPage && !waiting}">
+                <div class="container-post">
+                    <c:set var="post" scope="request" value="${tmpPost}"/>
+                    <%@include file="fragments/post.jspf"%>
                 </div>
-                <img src="../resources/images/placeholder.svg" class="img-responsive">
-                <div class="post-footer">
-                    <div class="col col-md-10">
-                        <h6>Dodane przez: piolug93 Dnia: 12/07/2018</h6>
-                    </div>
-                    <div class="col col-md-2 input-group">
-                        <button class="btn btn-success">+</button>
-                        <span class="score">0</span>
-                        <button class="btn btn-danger vote-down">-</button>
-                    </div>
+            </c:when>
+            <c:when test="${!tmpPost.mainPage && waiting}">
+                <div class="container-post">
+                    <c:set var="post" scope="request" value="${tmpPost}"/>
+                    <%@include file="fragments/post.jspf"%>
                 </div>
-            </div>
-        </div>
-    </div>
+            </c:when>
+        </c:choose>
+    </c:forEach>
+  <%@include file="fragments/footer.jspf"%>
   </body>
 </html>

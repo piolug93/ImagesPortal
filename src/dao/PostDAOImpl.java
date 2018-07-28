@@ -20,6 +20,7 @@ import java.util.Map;
 public class PostDAOImpl implements PostDAO {
     private static final String CREATE_POST = "INSERT INTO `posts` (`author`, `title`, `content`, `source`, `date`, `password`, `secured`, `imageName`) VALUES (:author, :title, :content, :source, :date, :password, :secured, :imageName);";
     private static final String READ_POST = "SELECT * FROM `posts` LEFT JOIN `users` ON posts.author = users.id WHERE posts.id = :id;";
+    private static final String READ_ALL_POST = "SELECT * FROM `posts` LEFT JOIN `users` ON posts.author = users.id";
     NamedParameterJdbcTemplate template;
 
     public PostDAOImpl() {
@@ -66,7 +67,8 @@ public class PostDAOImpl implements PostDAO {
 
     @Override
     public List<Post> getAll() {
-        return null;
+        List<Post> posts = template.query(READ_ALL_POST, new PostRowMapper());
+        return posts;
     }
 
     private class PostRowMapper implements RowMapper<Post> {
@@ -84,6 +86,7 @@ public class PostDAOImpl implements PostDAO {
             post.setVoteUp(resultSet.getLong("voteUp"));
             post.setVoteDown(resultSet.getLong("voteDown"));
             post.setImageName(resultSet.getString("imageName"));
+            post.setMainPage(resultSet.getBoolean("mainPage"));
             post.setAuthor(user);
             return post;
         }

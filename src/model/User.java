@@ -17,6 +17,7 @@ public class User {
 
     public User(User user) {
 
+        this.id = user.id;
         this.login = user.login;
         this.password = user.password;
         this.email = user.email;

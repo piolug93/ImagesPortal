@@ -10,6 +10,8 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import static util.PasswordUtil.encryptPassword;
+
 public class UserService {
     public User getUserById(long id) {
         UserDAO userDAO = getUserDAO();
@@ -47,17 +49,5 @@ public class UserService {
         user.setLastIp(null);
         UserDAO userDAO = getUserDAO();
         userDAO.create(user);
-    }
-
-    private String encryptPassword(String password) {
-        MessageDigest digest = null;
-        try {
-            digest = MessageDigest.getInstance("MD5");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        digest.update(password.getBytes());
-        String md5Password = new BigInteger(1, digest.digest()).toString(16);
-        return md5Password;
     }
 }

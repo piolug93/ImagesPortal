@@ -37,6 +37,7 @@ public class LoginController extends HttpServlet {
         }
         try {
             request.login(id, password);
+            request.getSession().setAttribute("user", user);
             response.sendRedirect(request.getHeader("referer"));
         } catch(ServletException e) {
             request.setAttribute("error", "bad_login");

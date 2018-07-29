@@ -23,7 +23,7 @@ public class AddPostController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String title = request.getParameter("title");
         String source = request.getParameter("source");
-        boolean secured  = Boolean.parseBoolean(request.getParameter("secured"));
+        boolean secured  = "on".equals(request.getParameter("secured"));
         String password = request.getParameter("password");
         String content = request.getParameter("content");
         User authenticatedUser = (User) request.getSession().getAttribute("user");

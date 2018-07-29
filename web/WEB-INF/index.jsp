@@ -8,13 +8,13 @@
     <%@include file="fragments/header.jspf"%>
     <c:forEach var="tmpPost" items="${requestScope.posts}">
         <c:choose>
-            <c:when test="${tmpPost.mainPage && !waiting}">
+            <c:when test="${tmpPost.mainPage && !waiting && !tmpPost.secured}">
                 <div class="container-post">
                     <c:set var="post" scope="request" value="${tmpPost}"/>
                     <%@include file="fragments/post.jspf"%>
                 </div>
             </c:when>
-            <c:when test="${!tmpPost.mainPage && waiting}">
+            <c:when test="${!tmpPost.mainPage && waiting && !tmpPost.secured}">
                 <div class="container-post">
                     <c:set var="post" scope="request" value="${tmpPost}"/>
                     <%@include file="fragments/post.jspf"%>

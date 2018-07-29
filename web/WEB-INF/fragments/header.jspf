@@ -15,7 +15,7 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">Główna</a></li>
                 <li><a href="/waiting">Poczekalnia</a></li>
-                <li><a href="#">Losuj</a></li>
+                <li><a href="/random">Losuj</a></li>
                 <li><a href="#">Top</a></li>
                 <li><a href="addpost">Dodaj</a></li>
             </ul>

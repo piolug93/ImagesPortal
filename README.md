@@ -7,7 +7,7 @@ TODO:
  - [X] Add view for random post
  - [ ] Add view for top posts
  - [X] Add secured post module with password
- - [ ] Add vote post module
+ - [X] Add vote post module
 
 I will show my page on these screenshots.
 ![](https://raw.githubusercontent.com/piolug93/ImagesPortal/master/MainPage.png)

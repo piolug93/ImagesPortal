@@ -1,9 +1,9 @@
 package controller;
 
 import exception.ErrorRegistrationException;
-import model.EmailValidator;
-import model.LoginValidator;
-import model.PasswordValidator;
+import util.EmailValidator;
+import util.LoginValidator;
+import util.PasswordValidator;
 import service.UserService;
 import Enum.RegistrationErrors;
 

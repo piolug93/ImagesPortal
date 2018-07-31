@@ -1,4 +1,4 @@
-package model;
+package util;
 
 import exception.ErrorRegistrationException;
 import Enum.RegistrationErrors;

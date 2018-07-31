@@ -1,6 +1,7 @@
-package model;
+package util;
 
 import exception.ErrorRegistrationException;
+import model.User;
 import org.springframework.dao.EmptyResultDataAccessException;
 import service.UserService;
 import Enum.RegistrationErrors;

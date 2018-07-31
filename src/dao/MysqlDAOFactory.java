@@ -10,4 +10,9 @@ public class MysqlDAOFactory extends DAOFactory{
     public PostDAO getPostDAO() {
         return new PostDAOImpl();
     }
+
+    @Override
+    public VoteDAO getVoteDAO() {
+        return new VoteDAOImpl();
+    }
 }

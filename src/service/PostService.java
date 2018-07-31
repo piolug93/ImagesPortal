@@ -30,6 +30,11 @@ public class PostService {
         return result;
     }
 
+    public boolean updatePost(Post post) {
+        PostDAO postDAO = getPostDAO();
+        return postDAO.update(post);
+    }
+
     public Post getPostById(long id) {
         PostDAO postDAO = getPostDAO();
         Post post = postDAO.read(id);

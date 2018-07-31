@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Post {
+public class Post implements Serializable {
     long id;
     User author;
     String title;

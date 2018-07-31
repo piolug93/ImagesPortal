@@ -4,24 +4,21 @@ import model.Post;
 import model.User;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.namedparam.*;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import util.ConnectionProvider;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class PostDAOImpl implements PostDAO {
     private static final String CREATE_POST = "INSERT INTO `posts` (`author`, `title`, `content`, `source`, `date`, `password`, `secured`, `imageName`) VALUES (:author, :title, :content, :source, :date, :password, :secured, :imageName);";
     private static final String READ_POST = "SELECT * FROM `posts` LEFT JOIN `users` ON posts.author = users.id WHERE posts.id = :id;";
     private static final String READ_ALL_POST = "SELECT * FROM `posts` LEFT JOIN `users` ON posts.author = users.id";
     NamedParameterJdbcTemplate template;
+    private static final String UPDATE_POST = "UPDATE `posts` SET author = :author, title = :title, content = :content, source = :source, date = :date, password = :password, secured = :secured, voteUp = :voteUp, voteDown = :voteDown, views = :views, imageName = :imageName, mainPage = :mainPage;";
 
     public PostDAOImpl() {
         template = new NamedParameterJdbcTemplate(ConnectionProvider.getDataSource());
@@ -31,16 +28,9 @@ public class PostDAOImpl implements PostDAO {
     public Post create(Post post) {
         Post resultPost = new Post(post);
         KeyHolder holder = new GeneratedKeyHolder();
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("author", post.getAuthor().getId());
-        paramMap.put("title", post.getTitle());
-        paramMap.put("content", post.getSource());
-        paramMap.put("source", post.getSource());
-        paramMap.put("date", post.getDate());
-        paramMap.put("password", post.getPassword());
-        paramMap.put("secured", post.getSecured());
-        paramMap.put("imageName", post.getImageName());
-        SqlParameterSource paramSource = new MapSqlParameterSource(paramMap);
+        PostSqlParameterSource paramSource = new PostSqlParameterSource(post);
+        paramSource.addValue("author", post.getAuthor().getId());
+        System.out.println(paramSource.getValue("author"));
         int update = template.update(CREATE_POST, paramSource, holder);
         if(update > 0) {
             resultPost.setId(holder.getKey().longValue());
@@ -56,7 +46,12 @@ public class PostDAOImpl implements PostDAO {
     }
 
     @Override
-    public boolean update(Post updateObject) {
+    public boolean update(Post post) {
+        PostSqlParameterSource paramSource = new PostSqlParameterSource(post);
+        paramSource.addValue("author", post.getAuthor().getId());
+        int update = template.update(UPDATE_POST, paramSource);
+        if(update > 0)
+            return true;
         return false;
     }
 
@@ -89,6 +84,30 @@ public class PostDAOImpl implements PostDAO {
             post.setMainPage(resultSet.getBoolean("mainPage"));
             post.setAuthor(user);
             return post;
+        }
+    }
+
+    private class PostSqlParameterSource extends AbstractSqlParameterSource {
+        private BeanPropertySqlParameterSource beanPropertySqlParameterSource;
+        private MapSqlParameterSource mapSqlParameterSource;
+
+        public PostSqlParameterSource(Post post) {
+            beanPropertySqlParameterSource = new BeanPropertySqlParameterSource(post);
+            mapSqlParameterSource = new MapSqlParameterSource();
+        }
+
+        public void addValue(String paramName, Object value) {
+            mapSqlParameterSource.addValue(paramName, value);
+        }
+
+        @Override
+        public boolean hasValue(String paramName) {
+            return beanPropertySqlParameterSource.hasValue(paramName) || mapSqlParameterSource.hasValue(paramName);
+        }
+
+        @Override
+        public Object getValue(String paramName) throws IllegalArgumentException {
+            return mapSqlParameterSource.hasValue(paramName) ? mapSqlParameterSource.getValue(paramName) : beanPropertySqlParameterSource.getValue(paramName);
         }
     }
 }

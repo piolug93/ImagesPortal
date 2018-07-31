@@ -79,6 +79,7 @@ public class PostDAOImpl implements PostDAO {
             post.setSource(resultSet.getString("source"));
             post.setVoteUp(resultSet.getLong("voteUp"));
             post.setVoteDown(resultSet.getLong("voteDown"));
+            post.setViews(resultSet.getLong("views"));
             post.setImageName(resultSet.getString("imageName"));
             post.setMainPage(resultSet.getBoolean("mainPage"));
             post.setAuthor(user);

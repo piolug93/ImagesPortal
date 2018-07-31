@@ -1,4 +1,12 @@
+<%@ page import="service.PostService" %>
+<%@ page import="model.Post" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    PostService postService = new PostService();
+    Post post = (Post) request.getAttribute("post");
+    post.setViews(post.getViews() + 1);
+    postService.updatePost(post);
+%>
 <div class="container">
         <div class="post row">
             <div class="col col-md-10 col-md-offset-1 border">
@@ -7,10 +15,11 @@
             </div>
             <img src="images/${post.imageName}" class="img-responsive">
             <div class="post-footer">
-                <div class="col col-md-10">
+                <div class="col col-md-9">
                     <h6>Dodane prze: ${post.author.login} Dnia: <fmt:formatDate value="${post.date}" pattern="dd/MM/YYYY"/></h6>
                 </div>
-                <div class="col col-md-2 input-group">
+                <div class="col col-md-3 input-group">
+                    <span class="views">Odsłony: ${post.views}</span>
                     <a href="vote?postId=${post.id}&vote=VOTE_UP" class="btn btn-success">+</a>
                     <span class="score">${post.voteUp - post.voteDown}</span>
                     <a href="vote?postId=${post.id}&vote=VOTE_DOWN" class="btn btn-danger vote-down">-</a>

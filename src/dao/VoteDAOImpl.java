@@ -84,8 +84,8 @@ public class VoteDAOImpl implements VoteDAO {
         @Override
         public Vote mapRow(ResultSet resultSet, int i) throws SQLException {
             Vote vote = new Vote();
-            vote.setPostId(resultSet.getLong("userId"));
-            vote.setUserId(resultSet.getLong("postId"));
+            vote.setPostId(resultSet.getLong("postId"));
+            vote.setUserId(resultSet.getLong("userId"));
             vote.setType(VoteType.valueOf(resultSet.getString("type")));
             return vote;
         }

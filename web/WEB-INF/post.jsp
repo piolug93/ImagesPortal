@@ -6,29 +6,14 @@
 </head>
 <body>
 <%@include file="fragments/header.jspf"%>
-<div class="container">
-    <c:if test="${not empty requestScope.post}">
-        <c:choose>
-            <c:when test="${(post.secured && allow) || !post.secured}">
-                <div class="post row">
-                    <div class="col col-md-10 col-md-offset-1 border">
-                        <h3>${post.title}</h3>
-                        <h5>${post.content}</h5>
-                    </div>
-                    <img src="images/${post.imageName}" class="img-responsive">
-                    <div class="post-footer">
-                        <div class="col col-md-10">
-                            <h6>Dodane prze: ${post.author.login} Dnia: <fmt:formatDate value="${post.date}" pattern="dd/MM/YYYY"/></h6>
-                        </div>
-                        <div class="col col-md-2 input-group">
-                            <button class="btn btn-success">+</button>
-                            <span class="score">${post.voteUp - post.voteDown}</span>
-                            <button class="btn btn-danger vote-down">-</button>
-                        </div>
-                    </div>
-                </div>
-            </c:when>
-            <c:otherwise>
+
+<c:if test="${not empty requestScope.post}">
+    <c:choose>
+        <c:when test="${(post.secured && allow) || !post.secured}">
+            <%@include file="fragments/post.jspf"%>
+        </c:when>
+        <c:otherwise>
+            <div class="container">
                 <div class="post row">
                     <div class="col-md-6 col-md-offset-3">
                         <div class="panel panel-login">
@@ -78,10 +63,10 @@
                         </div>
                     </div>
                 </div>
-            </c:otherwise>
-        </c:choose>
-    </c:if>
-</div>
+            </div>
+        </c:otherwise>
+    </c:choose>
+</c:if>
 <%@include file="fragments/footer.jspf"%>
 </body>
 </html>

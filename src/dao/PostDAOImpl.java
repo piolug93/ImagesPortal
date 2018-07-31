@@ -30,7 +30,6 @@ public class PostDAOImpl implements PostDAO {
         KeyHolder holder = new GeneratedKeyHolder();
         PostSqlParameterSource paramSource = new PostSqlParameterSource(post);
         paramSource.addValue("author", post.getAuthor().getId());
-        System.out.println(paramSource.getValue("author"));
         int update = template.update(CREATE_POST, paramSource, holder);
         if(update > 0) {
             resultPost.setId(holder.getKey().longValue());

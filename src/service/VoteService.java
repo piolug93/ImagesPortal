@@ -18,7 +18,7 @@ public class VoteService {
 
     public Vote updateVote(long postId, long userId, VoteType type) {
         VoteDAO voteDAO = getVoteDAO();
-        Vote voteToUpdate = voteDAO.getVoteByUserIdPostId(userId, postId);
+        Vote voteToUpdate = voteDAO.getVoteByUserIdPostId(postId, userId);
         if(voteToUpdate != null) {
             voteToUpdate.setType(type);
             voteDAO.update(voteToUpdate);
@@ -28,7 +28,7 @@ public class VoteService {
 
     public Vote addOrUpdateVote(long postId, long userId, VoteType type) {
         VoteDAO voteDAO = getVoteDAO();
-        Vote vote = voteDAO.getVoteByUserIdPostId(userId, postId);
+        Vote vote = voteDAO.getVoteByUserIdPostId(postId, userId);
         Vote resultVote;
         if(vote == null)
             resultVote = addVote(postId, userId, type);

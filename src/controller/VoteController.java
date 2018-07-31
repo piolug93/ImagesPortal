@@ -24,7 +24,7 @@ public class VoteController extends HttpServlet {
             long postId = Long.parseLong(request.getParameter("postId"));
             updateVote(postId, userId, voteType);
         }
-        response.sendRedirect(request.getContextPath() + "/");
+        response.sendRedirect(request.getHeader("referer"));
     }
 
     private void updateVote(long postId, long userId, VoteType voteType) {

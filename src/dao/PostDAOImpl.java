@@ -18,7 +18,7 @@ public class PostDAOImpl implements PostDAO {
     private static final String READ_POST = "SELECT * FROM `posts` LEFT JOIN `users` ON posts.author = users.id WHERE posts.id = :id;";
     private static final String READ_ALL_POST = "SELECT * FROM `posts` LEFT JOIN `users` ON posts.author = users.id";
     NamedParameterJdbcTemplate template;
-    private static final String UPDATE_POST = "UPDATE `posts` SET author = :author, title = :title, content = :content, source = :source, date = :date, password = :password, secured = :secured, voteUp = :voteUp, voteDown = :voteDown, views = :views, imageName = :imageName, mainPage = :mainPage;";
+    private static final String UPDATE_POST = "UPDATE `posts` SET author = :author, title = :title, content = :content, source = :source, date = :date, password = :password, secured = :secured, voteUp = :voteUp, voteDown = :voteDown, views = :views, imageName = :imageName, mainPage = :mainPage WHERE id = :id;";
 
     public PostDAOImpl() {
         template = new NamedParameterJdbcTemplate(ConnectionProvider.getDataSource());

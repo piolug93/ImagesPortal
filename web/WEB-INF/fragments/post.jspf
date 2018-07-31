@@ -11,9 +11,9 @@
                     <h6>Dodane prze: ${post.author.login} Dnia: <fmt:formatDate value="${post.date}" pattern="dd/MM/YYYY"/></h6>
                 </div>
                 <div class="col col-md-2 input-group">
-                    <button class="btn btn-success">+</button>
+                    <a href="vote?postId=${post.id}&vote=VOTE_UP" class="btn btn-success">+</a>
                     <span class="score">${post.voteUp - post.voteDown}</span>
-                    <button class="btn btn-danger vote-down">-</button>
+                    <a href="vote?postId=${post.id}&vote=VOTE_DOWN" class="btn btn-danger vote-down">-</a>
                 </div>
             </div>
         </div>

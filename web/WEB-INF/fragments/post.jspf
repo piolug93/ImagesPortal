@@ -1,11 +1,14 @@
 <%@ page import="service.PostService" %>
 <%@ page import="model.Post" %>
+<%@ page import="util.ImageUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     PostService postService = new PostService();
     Post post = (Post) request.getAttribute("post");
     post.setViews(post.getViews() + 1);
     postService.updatePost(post);
+    String base64 = ImageUtil.imageToBase64(post.getImageName());
+    request.setAttribute("image", base64);
 %>
 <div class="container">
         <div class="post row">
@@ -13,7 +16,7 @@
                 <h3>${post.title}</h3>
                 <h5>${post.content}</h5>
             </div>
-            <img src="images/${post.imageName}" class="img-responsive">
+            <img src="${image}" class="img-responsive">
             <div class="post-footer">
                 <div class="col col-md-9">
                     <h6>Dodane prze: ${post.author.login} Dnia: <fmt:formatDate value="${post.date}" pattern="dd/MM/YYYY"/></h6>

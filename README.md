@@ -5,7 +5,7 @@ This portal allows add post with photos and views in main page, waiting page.
 
 TODO:
  - [X] Add view for random post
- - [ ] Add view for top posts
+ - [X] Add view for top posts
  - [X] Add secured post module with password
  - [X] Add vote post module
  - [ ] Change sharing images with URL to stream(security)

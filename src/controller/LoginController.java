@@ -43,7 +43,6 @@ public class LoginController extends HttpServlet {
             request.setAttribute("error", "bad_login");
             request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
         }
-
     }
 }
 

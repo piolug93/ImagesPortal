@@ -13,4 +13,5 @@ TODO:
 I will show my page on these screenshots.
 ![](https://raw.githubusercontent.com/piolug93/ImagesPortal/master/MainPage.png)
 ![](https://raw.githubusercontent.com/piolug93/ImagesPortal/master/LoginPage.png)
-![](https://raw.githubusercontent.com/piolug93/ImagesPortal/master/RegisterPage.png)![enter image description here](https://raw.githubusercontent.com/piolug93/ImagesPortal/master/AddPostPage.png)
+![](https://raw.githubusercontent.com/piolug93/ImagesPortal/master/RegisterPage.png)
+![](https://raw.githubusercontent.com/piolug93/ImagesPortal/master/AddPostPage.png)

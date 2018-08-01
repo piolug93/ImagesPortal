@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface PostDAO extends GenericDAO<Post, Long> {
     List<Post> getAll();
+    List<Post> getMainPosts();
+    List<Post> getWaitingPosts();
 }

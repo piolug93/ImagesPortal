@@ -52,4 +52,16 @@ public class PostService {
         PostDAO postDAO = factory.getPostDAO();
         return postDAO;
     }
+
+    public List<Post> getMainPosts() {
+        PostDAO postDAO = getPostDAO();
+        List<Post> posts = postDAO.getMainPosts();
+        return posts;
+    }
+
+    public List<Post> getWaitingPosts() {
+        PostDAO postDAO = getPostDAO();
+        List<Post> posts = postDAO.getWaitingPosts();
+        return posts;
+    }
 }

@@ -17,8 +17,12 @@ public class PostDAOImpl implements PostDAO {
     private static final String CREATE_POST = "INSERT INTO `posts` (`author`, `title`, `content`, `source`, `date`, `password`, `secured`, `imageName`) VALUES (:author, :title, :content, :source, :date, :password, :secured, :imageName);";
     private static final String READ_POST = "SELECT * FROM `posts` LEFT JOIN `users` ON posts.author = users.id WHERE posts.id = :id;";
     private static final String READ_ALL_POST = "SELECT * FROM `posts` LEFT JOIN `users` ON posts.author = users.id";
-    NamedParameterJdbcTemplate template;
+    private static final String READ_MAIN_POST = "SELECT * FROM `posts` LEFT JOIN `users` ON posts.author = users.id WHERE posts.mainPage = 1 AND posts.secured = 0";
+    private static final String READ_WAITING_POST = "SELECT * FROM `posts` LEFT JOIN `users` ON posts.author = users.id WHERE posts.mainPage = 0 AND posts.secured = 0";
     private static final String UPDATE_POST = "UPDATE `posts` SET author = :author, title = :title, content = :content, source = :source, date = :date, password = :password, secured = :secured, voteUp = :voteUp, voteDown = :voteDown, views = :views, imageName = :imageName, mainPage = :mainPage WHERE id = :id;";
+
+
+    NamedParameterJdbcTemplate template;
 
     public PostDAOImpl() {
         template = new NamedParameterJdbcTemplate(ConnectionProvider.getDataSource());
@@ -64,6 +68,18 @@ public class PostDAOImpl implements PostDAO {
         List<Post> posts = template.query(READ_ALL_POST, new PostRowMapper());
         return posts;
     }
+
+    public List<Post> getMainPosts() {
+        List<Post> posts = template.query(READ_MAIN_POST, new PostRowMapper());
+        return posts;
+    }
+
+    public List<Post> getWaitingPosts() {
+        List<Post> posts = template.query(READ_WAITING_POST, new PostRowMapper());
+        return posts;
+    }
+
+
 
     private class PostRowMapper implements RowMapper<Post> {
         @Override

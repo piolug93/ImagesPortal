@@ -19,11 +19,13 @@ public class HomeController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PostService postService = new PostService();
-        List<Post> posts = postService.getAllPost();
-        request.setAttribute("posts", posts);
+        List<Post> posts = null;
         if(request.getRequestURI().equals("/waiting")) {
-            request.setAttribute("waiting", true);
+            posts = postService.getWaitingPosts();
         }
+        else
+            posts = postService.getMainPosts();
+        request.setAttribute("posts", posts);
         request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
     }
 }

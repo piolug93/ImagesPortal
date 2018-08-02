@@ -8,7 +8,7 @@ TODO:
  - [X] Add view for top posts
  - [X] Add secured post module with password
  - [X] Add vote post module
- - [X] ~~Change sharing images with URL to stream(security)~~ Change sharing images with URL to base64(security)
+ - [X] Change sharing images with URL to stream(security)
 
 I will show my page on these screenshots.
 ![](https://raw.githubusercontent.com/piolug93/ImagesPortal/master/MainPage.png)
